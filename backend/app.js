@@ -1,12 +1,17 @@
 const express = require('express');// on importe express
 const bodyParser = require('body-parser');// on importe body-parser
 const mongoose = require('mongoose');// on importe mongoose
-const dotenv = require('dotenv').config();// on importe dotenv pour masquer l'url/mdp/nom d'hôte
+const dotenv = require('dotenv');// on importe dotenv pour masquer l'url/mdp/nom d'hôte
+dotenv.config();
 
 const app = express();// on créé notre application express
 
-mongoose.connect('mongodb+srv:DB_ADMIN_USERNAME//:DB_ADMIN_PASSWORD@DB_ADMIN_URL/<dbname>?retryWrites=true&w=majority',
-  { useNewUrlParser: true,
+mongoose.connect(process.env.DB_ADMIN_URI,
+  { 
+    dbName:process.env.DB_ADMIN_DBNAME,
+    user:process.env.DB_ADMIN_USERNAME,
+    pass:process.env.DB_ADMIN_PASSWORD,
+    useNewUrlParser: true,
     useUnifiedTopology: true })
   .then(() => console.log('Connexion à MongoDB Atlas réussie !'))
   .catch(() => console.log('Connexion à MongoDB Atlas échouée !'));
