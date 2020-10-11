@@ -1,9 +1,18 @@
 const bcrypt = require('bcrypt');// on importe bcrypt qui va nous permettre de crypter nos mots de passe
 const jwt = require('jsonwebtoken');// on importe jsonwebtoken
+const emailValidator = require('email-validator');
 
 const User = require('../models/User');// on importe notre schéma User
+const passwordValidator = require('../middleware/passwordValidator');
+const emailRegex = /^[-!#$%&'*+\/0-9=?A-Z^_a-z{|}~](\.?[-!#$%&'*+\/0-9=?A-Z^_a-z`{|}~])*@[a-zA-Z0-9](-*\.?[a-zA-Z0-9])*\.[a-zA-Z](-?[a-zA-Z0-9])+$/;
 
 exports.signup = (req, res , next) => {
+    if (!emailValidator.validate(req.body.email) && !emailRegex.test(req.body.email)) { 
+        return res.status(401).json({ error });// erreur 401 email non valide
+    }
+    if (!passwordValidator.validate(req.body.password)) { 
+        return res.status(401).json({ error });// erreur 401 mot de passe non valide
+    }
     bcrypt.hash(req.body.password, 10)// on appelle la fonction de hachage de bcrypt dans notre mot de passe et lui demandons de « saler » le mot de passe 10 fois.
         .then(hash => {
             const user = new User({//on crée un nouvel utilisateur dans la base de donnée

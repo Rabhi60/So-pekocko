@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');// on importe body-parser
 const mongoose = require('mongoose');// on importe mongoose
 const helmet = require('helmet');
 const path = require('path');// on importe path qui nous donne accès au chemin de notre système de fichier
-
+const toobusy = require('toobusy').maxLag(10);// on importe toobusy
 const dotenv = require('dotenv');// on importe dotenv pour masquer l'url/mdp/nom d'hôte
 dotenv.config();
 
@@ -34,6 +34,14 @@ app.use(bodyParser.json());//Pour toutes les routes de notre application, c'est 
 app.use('/images', express.static(path.join(__dirname, 'images')));// pour les requêtes a /images, express.static est utiliser pour servir un dossier static, on utilise la methode path.joint que l'on va lui passer dirname qui est le nom dossier dans lequel on va se trouver et on lui ajoute images qui est le dossier static
 
 app.use(helmet());
+
+app.use(function(req, res, next) {
+  if (toobusy()) {
+    res.send(503, "I'm busy right now, sorry.");
+  } else {
+    next();
+  } 
+});
 
 app.use('/api/sauces', sauceRoutes);// on utilse cette base pour toutes nos routes sauce
 app.use('/api/auth', userRoutes);// on utilse cette base pour toutes nos authentification

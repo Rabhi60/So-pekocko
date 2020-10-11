@@ -4,7 +4,6 @@ const fs = require('fs');// on importe file system de node pour avoir accès aux
 // la logique métier
 exports.createSauce = (req, res, next) => {
     const sauceObject = JSON.parse(req.body.sauce);// on transforme notre requête en objet JavaScript
-    //delete sauceObject._id;
     const sauce = new Sauce({
         ...sauceObject,
         imageUrl:`${req.protocol}://${req.get('host')}/images/${req.file.filename}`,//on donne une URL a notre image. http://localhost:3000/images/<image-name>.jpg = req.protocol pour obtenir le premier segment (dans notre cas 'http'), on ajoute '://' , puis utilisons req.get('host') pour résoudre l'hôte du serveur (ici, 'localhost:3000' ), on ajoute '/images/' et le nom de fichier pour compléter notre URL (req.file.filename ne contient que le segment filename).
