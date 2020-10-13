@@ -58,7 +58,7 @@ exports.getAllSauces = (req, res, next) => {
         _id: req.params.id
     })
     .then(sauce => {
-        console.log(req.body);
+       // console.log(req.body);
         switch (req.body.like) { // permet de recuperer 0 ou 1 ou -1
             case 1 : // cas ou on va liké
                 if (!sauce.usersLiked.includes(req.body.userId) ){ 

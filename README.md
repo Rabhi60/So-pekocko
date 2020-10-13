@@ -1,9 +1,29 @@
-## Piquante
+## Piquante 
 
-Le projet a été généré avec [Angular CLI](https://github.com/angular/angular-cli) version 7.0.2.
+Copier le dossier, le projet doit être à la racine du dossier.
 
-Pour faire fonctionner le projet, vous devez installer node-sass à part.
+## Lancement du serveur côté frontend
+Ouvrir un terminal et suivre les étapes suivantes :
+1 - Tapez `cd frontend`, vérifier bien qu'après cette étape votre chemin fini par frontend
+2 - Puis tapez `npm install` (installation des modules )
+3 - Puis tapez `ng serve` (le serveur se lance)
 
-## Development server
 
-Démarrer `ng serve` pour avoir accès au serveur de développement. Rendez-vous sur `http://localhost:4200/`. L'application va se recharger automatiquement si vous modifiez un fichier source.
+## Lancement du serveur côté backend
+
+Ouvrir un nouveau terminal et suivre les étapes suivantes :
+1 - Tapez `cd backend`, vérifier bien qu'après cette étape votre chemin fini par backend
+2 - Puis tapez `npm install` (installation des modules)
+3 - Puis tapez `nodemon server` (le serveur se lance)
+
+## Lien de l'application après avoir lancé les serveurs (frontend et backend) 
+
+Rendez-vous sur `http://localhost:4200/`. L'application va se recharger automatiquement si vous modifiez un fichier source.
+Ps: Créé un compte utilisateur avec:
+Une adresse email correcte
+Un mot de passe qui contient :
+    - Un caractère en majuscule minimum
+    - Un caractères en minuscule minimum
+    - 2 chiffres minimum
+    - 8 caratères au total minimum et 100 au maximum
+    - Ne doit pas contenir d'espaces
