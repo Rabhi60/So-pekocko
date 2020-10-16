@@ -1,5 +1,7 @@
 const Sauce = require('../models/Sauce');// on importe notre schéma Sauce 
 const fs = require('fs');// on importe file system de node pour avoir accès aux différentes opérations liées fichiers
+const nameRegex = /^[a-zA-Z\-]+$/i;
+const descriptionRegex = /^[a-z\d\-,.'\s]+$/i;
 
 // la logique métier
 exports.createSauce = (req, res, next) => {
@@ -24,6 +26,12 @@ exports.getOneSauce = (req, res, next) => {
 };
 
 exports.modifySauce = (req, res, next) => {
+    if (!nameRegex.test(req.body.name) || !nameRegex.test(req.body.manufacturer )) { 
+        return res.status(400).json({ error });// erreur 400 
+    }
+    if (!descriptionRegex.test(req.body.description) || !descriptionRegex.test(req.body.mainPepper )) { 
+        return res.status(400).json({ error });// erreur 400 
+    }
     const sauceObject = req.file ?//on crée un objet sauceObject qui regarde si req.file existe ou non. S'il existe, on traite la nouvelle image ; s'il n'existe pas, on traite simplement l'objet entrant.
     {
         ...JSON.parse(req.body.sauce),

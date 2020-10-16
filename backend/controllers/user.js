@@ -7,7 +7,7 @@ const passwordValidator = require('../middleware/passwordValidator');
 const emailRegex = /^[-!#$%&'*+\/0-9=?A-Z^_a-z{|}~](\.?[-!#$%&'*+\/0-9=?A-Z^_a-z`{|}~])*@[a-zA-Z0-9](-*\.?[a-zA-Z0-9])*\.[a-zA-Z](-?[a-zA-Z0-9])+$/;
 
 exports.signup = (req, res , next) => {
-    if (!emailValidator.validate(req.body.email) && !emailRegex.test(req.body.email)) { 
+    if (!emailValidator.validate(req.body.email) || !emailRegex.test(req.body.email)) { 
         return res.status(401).json({ error: 'accès refusé' });// erreur 401 email non valide
     }
     if (!passwordValidator.validate(req.body.password)) { 
@@ -27,7 +27,7 @@ exports.signup = (req, res , next) => {
 };
 
 exports.login = (req, res , next) => { 
-    if (!emailValidator.validate(req.body.email) && !emailRegex.test(req.body.email)) { 
+    if (!emailValidator.validate(req.body.email) || !emailRegex.test(req.body.email)) { 
         return res.status(401).json({ error: 'accès refusé' });// erreur 401 email non valide
     } 
     if (!passwordValidator.validate(req.body.password)) { 
