@@ -4,7 +4,7 @@ const emailValidator = require('email-validator');
 
 const User = require('../models/User');// on importe notre schéma User
 const passwordValidator = require('../middleware/passwordValidator');
-const emailRegex = /^[-!#$%&'*+\/0-9=?A-Z^_a-z{|}~](\.?[-!#$%&'*+\/0-9=?A-Z^_a-z`{|}~])*@[a-zA-Z0-9](-*\.?[a-zA-Z0-9])*\.[a-zA-Z](-?[a-zA-Z0-9])+$/;
+const emailRegex = /^[a-zA-Z0-9]+[a-zA-Z0-9.]+@[a-zA-Z0-9]+[.]{1}[a-z]{2,3}$/;
 
 exports.signup = (req, res , next) => {
     if (!emailValidator.validate(req.body.email) || !emailRegex.test(req.body.email)) { 
