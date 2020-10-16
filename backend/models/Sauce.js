@@ -8,10 +8,9 @@ nameValidator = [
       message: 'Name should be between {ARGS[0]} and {ARGS[1]} characters',
     }),
     validate({
-      validator: 'isAlphanumeric',
-      passIfEmpty: true,
-      message: 'Name should contain alpha-numeric characters only',
-    }),
+        validator: 'matches',
+        arguments: /^[a-z\d\-.'\s]+$/i,
+      })
 ]
 
 descriptionValidator = [
