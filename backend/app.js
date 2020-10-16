@@ -24,7 +24,7 @@ mongoose.connect(process.env.DB_ADMIN_URI,//cette partie permet de nous connecte
 const app = express();// on créé notre application express
 
 app.use((req, res, next) => {// partie cors
-    res.setHeader('Access-Control-Allow-Origin', '*');// origine permet de voir qui peut utilser l'API, l'étoile permet de dire que tou le monde peut accéder
+    res.setHeader('Access-Control-Allow-Origin', '*');// origin permet de voir qui peut utiliser l'API, l'étoile permet de dire que tout le monde peut accéder
     res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');// on donne l'autorisation d'utiliser certains en-tête
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');// on donne l'autorisation d'utiliser certaines méthodes les verbes de requête GET, POST...
     next();
@@ -32,7 +32,7 @@ app.use((req, res, next) => {// partie cors
 
 app.use(bodyParser.json());//Pour toutes les routes de notre application, c'est ce qui va transformer le corps de la requête en objet JavaScript utilisable, ce middleware sera global pour l'application
 
-app.use('/images', express.static(path.join(__dirname, 'images')));// pour les requêtes a /images, express.static est utiliser pour servir un dossier static, on utilise la methode path.joint que l'on va lui passer dirname qui est le nom dossier dans lequel on va se trouver et on lui ajoute images qui est le dossier static
+app.use('/images', express.static(path.join(__dirname, 'images')));// pour les requêtes a /images, express.static est utilisé pour servir un dossier static, on utilise la methode path.joint que l'on va lui passer dirname qui est le nom dossier dans lequel on va se trouver et on lui ajoute images qui est le dossier static
 
 app.use(helmet());
 

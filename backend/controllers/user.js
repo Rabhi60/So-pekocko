@@ -8,10 +8,10 @@ const emailRegex = /^[-!#$%&'*+\/0-9=?A-Z^_a-z{|}~](\.?[-!#$%&'*+\/0-9=?A-Z^_a-z
 
 exports.signup = (req, res , next) => {
     if (!emailValidator.validate(req.body.email) && !emailRegex.test(req.body.email)) { 
-        return res.status(401).json({ error });// erreur 401 email non valide
+        return res.status(401).json({ error: 'accès refusé' });// erreur 401 email non valide
     }
     if (!passwordValidator.validate(req.body.password)) { 
-        return res.status(401).json({ error });// erreur 401 mot de passe non valide
+        return res.status(401).json({ error: 'accès refusé' });// erreur 401 mot de passe non valide
     }
     bcrypt.hash(req.body.password, 10)// on appelle la fonction de hachage de bcrypt dans notre mot de passe et lui demandons de « saler » le mot de passe 10 fois.
         .then(hash => {
@@ -26,7 +26,13 @@ exports.signup = (req, res , next) => {
         .catch(error => res.status(500).json({ error }));// erreur serveur 500
 };
 
-exports.login = (req, res , next) => {
+exports.login = (req, res , next) => { 
+    if (!emailValidator.validate(req.body.email) && !emailRegex.test(req.body.email)) { 
+        return res.status(401).json({ error: 'accès refusé' });// erreur 401 email non valide
+    } 
+    if (!passwordValidator.validate(req.body.password)) { 
+        return res.status(401).json({ error: 'accès refusé' });// erreur 401 mot de passe non valide
+    }
     User.findOne({ email: req.body.email })// on va chercher l'email de l'utilsateur dans la base de donnée
         .then(user => {
             if (!user){// si on ne trouve pas d'email correspondant on renvoie l'erreur ci-dessous
