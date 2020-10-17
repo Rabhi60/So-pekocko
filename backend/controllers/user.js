@@ -1,12 +1,12 @@
 const bcrypt = require('bcrypt');// on importe bcrypt qui va nous permettre de crypter nos mots de passe
 const jwt = require('jsonwebtoken');// on importe jsonwebtoken
-const emailValidator = require('email-validator');
+const emailValidator = require('email-validator');// validateur d'émail
 
 const User = require('../models/User');// on importe notre schéma User
-const passwordValidator = require('../middleware/passwordValidator');
-const emailRegex = /^[a-zA-Z0-9]+[a-zA-Z0-9.]+@[a-zA-Z0-9]+[.]{1}[a-z]{2,3}$/;
+const passwordValidator = require('../middleware/passwordValidator');// middleware pour contrôler le mot de passe
+const emailRegex = /^[a-z]{2,33}[._+-]{0,1}[a-z0-9]{0,30}@[a-z0-9]{2,230}[.]{1}[a-z]{2,15}$/i;// regex pour l'adresse mail
 
-exports.signup = (req, res , next) => {
+exports.signup = (req, res , next) => {// partie inscription
     if (!emailValidator.validate(req.body.email) || !emailRegex.test(req.body.email)) { 
         return res.status(401).json({ error: 'accès refusé' });// erreur 401 email non valide
     }
@@ -26,7 +26,7 @@ exports.signup = (req, res , next) => {
         .catch(error => res.status(500).json({ error }));// erreur serveur 500
 };
 
-exports.login = (req, res , next) => { 
+exports.login = (req, res , next) => { // partie connexion
     if (!emailValidator.validate(req.body.email) || !emailRegex.test(req.body.email)) { 
         return res.status(401).json({ error: 'accès refusé' });// erreur 401 email non valide
     } 

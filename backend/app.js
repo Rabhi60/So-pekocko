@@ -1,7 +1,7 @@
 const express = require('express');// on importe express
 const bodyParser = require('body-parser');// on importe body-parser
 const mongoose = require('mongoose');// on importe mongoose
-const helmet = require('helmet');
+const helmet = require('helmet');// on importe helmet
 const path = require('path');// on importe path qui nous donne accès au chemin de notre système de fichier
 const toobusy = require('toobusy-js');// on importe toobusy
 toobusy.maxLag(10);
@@ -34,9 +34,9 @@ app.use(bodyParser.json());//Pour toutes les routes de notre application, c'est 
 
 app.use('/images', express.static(path.join(__dirname, 'images')));// pour les requêtes a /images, express.static est utilisé pour servir un dossier static, on utilise la methode path.joint que l'on va lui passer dirname qui est le nom dossier dans lequel on va se trouver et on lui ajoute images qui est le dossier static
 
-app.use(helmet());
+app.use(helmet());// permet de contrer les attaques xss(grace a xss-filter qui par défaut)
 
-app.use(function(req, res, next) {
+app.use(function(req, res, next) {// toobusy permet de contrer les attaques type déni de service (DoS, Deny of Service)
   if (toobusy()) {
     res.send(503, "I'm busy right now, sorry.");
   } else {

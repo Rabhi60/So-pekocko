@@ -1,7 +1,7 @@
 const Sauce = require('../models/Sauce');// on importe notre schéma Sauce 
 const fs = require('fs');// on importe file system de node pour avoir accès aux différentes opérations liées fichiers
-const nameRegex = /^[a-z\d\-.'\s]{3,50}$/i;
-const descriptionRegex = /^[a-z\d\-,.'\s]{3,200}$/i;
+const nameRegex = /^[a-zÀ-ÿ\d\-.'\s]{3,50}$/i;// regex pour les caratères autorisé
+const descriptionRegex = /^[a-zÀ-ÿ\d\-,.'\s]{3,200}$/i;// regex pour les caratères autorisé
 
 // la logique métier
 exports.createSauce = (req, res, next) => {

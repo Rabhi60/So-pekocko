@@ -7,9 +7,9 @@ nameValidator = [
       arguments: [3, 50],
       message: 'Name should be between {ARGS[0]} and {ARGS[1]} characters',
     }),
-    validate({// ce validate va permettre certains caractères (a-z les lettres s permet les espace, d les chiffres et .,')
+    validate({// ce validate va permettre certains caractères (a-z les lettres, s permet les espace, d les chiffres et .,')
         validator: 'matches',
-        arguments: /^[a-z\d\-.'\s]+$/i,
+        arguments: /^[a-zÀ-ÿ\d\-.'\s]+$/i,
       })
 ]
 
@@ -19,9 +19,9 @@ descriptionValidator = [
       arguments: [3, 200],
       message: 'Name should be between {ARGS[0]} and {ARGS[1]} characters',
     }),
-    validate({// ce validate va permettre certains caractères (a-z les lettres s permet les espace, d les chiffres et .,')
+    validate({// ce validate va permettre certains caractères (a-z les lettres, s permet les espace, d les chiffres et .,')
         validator: 'matches',
-        arguments: /^[a-z\d\-,.'\s]+$/i,
+        arguments: /^[a-zÀ-ÿ\d\-,.'\s]+$/i,
       })
 ]
 
